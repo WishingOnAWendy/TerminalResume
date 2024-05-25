@@ -1,0 +1,33 @@
+{
+    "firstName": "Your",
+    "lastName": "Name",
+    "email": "email@example.com",
+    "phone": "123-456-7890",
+    "linkedin": "https://linkedin.com/in/yourprofile",
+    "github": "https://github.com/yourprofile",
+    "summary": "Brief summary of your professional background and career goals.",
+    "experience": [
+        {
+            "jobTitle": "Job Title",
+            "company": "Company Name",
+            "dates": "Dates of Employment",
+            "description": "Description of your responsibilities and achievements."
+        }
+    ],
+    "education": [
+        {
+            "degree": "Degree",
+            "institution": "Institution Name",
+            "year": "Graduation Year",
+            "description": "Relevant coursework, honors, or awards."
+        }
+    ],
+    "skills": ["Skill 1", "Skill 2", "Skill 3"],
+    "projects": [
+        {
+            "name": "Project Name",
+            "description": "Brief description of the project and your role.",
+            "link": "#"
+        }
+    ]
+}
