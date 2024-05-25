@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const popupOkButton = document.getElementById('popup-ok');
     let maximizedSection = null;
     const sectionStates = {}; // Object to store initial HTML of each section
-    let firstName = ''; // Variable to store first name
     let cmdPromptName = ''; // Variable to store command prompt name
 
     // Fetch content.json and update sections
@@ -22,8 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('github').textContent = 'GitHub';
             document.getElementById('github').href = data.github;
             
-            // Store first name and generate command prompt name
-            firstName = data.firstName;
             cmdPromptName = `${data.firstName.toLowerCase()}${data.lastName.charAt(0).toUpperCase()}`;
 
             // Populate the sections with their respective content

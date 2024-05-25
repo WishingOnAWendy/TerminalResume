@@ -60,9 +60,12 @@ section {
     display: inline-block;
     width: 12px;
     height: 12px;
-    background: #00ff00;
     border-radius: 50%;
     cursor: pointer;
+    position: relative; /* Ensure they all use the same positioning */
+    top: 0; /* Reset any vertical offset */
+    margin: 0; /* Reset any margins */
+    padding: 0; /* Reset any padding */
 }
 
 .window-controls .minimize {
