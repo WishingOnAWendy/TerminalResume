@@ -2,7 +2,6 @@
 
 Welcome to my interactive resume template! This project is a fun way to showcase your professional background using a dynamic, retro-style layout inspired by old-school command prompts. 🚀
 
-![Header Image](https://via.placeholder.com/800x200)
 
 ## ✨ Features
 
