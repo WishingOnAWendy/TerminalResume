@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,121 +8,123 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 id="name">Your Name</h1>
-            <p class="contact-info" id="contact-info">
-                <span id="email"></span> | <span id="phone"></span> | 
-                <a href="#" id="linkedin">LinkedIn</a> | 
-                <a href="#" id="github">GitHub</a>
-            </p>
-        </header>
-        <main id="main-content">
-            <div class="placeholder" id="placeholder-summary"></div>
-            <section class="summary" data-section="summary">
-                <div class="window-header">
-                    <h2>Summary</h2>
-                    <span class="window-controls">
-                        <span class="button minimize"></span>
-                        <span class="button maximize"></span>
-                        <span class="button close"></span>
-                    </span>
-                </div>
-                <div class="cmd-prompt">C:/User/You> run summary.exe</div>
-                <div class="content hidden-content">
-                    Brief summary of your professional background and career goals.
-                </div>
-            </section>
-            <div class="placeholder" id="placeholder-experience"></div>
-            <section class="experience" data-section="experience">
-                <div class="window-header">
-                    <h2>Experience</h2>
-                    <span class="window-controls">
-                        <span class="button minimize"></span>
-                        <span class="button maximize"></span>
-                        <span class="button close"></span>
-                    </span>
-                </div>
-                <div class="cmd-prompt">C:/User/You> run experience.exe</div>
-                <div class="content hidden-content">
-                    <div class="job">
-                        <h3>Job Title</h3>
-                        <p class="company">Company Name | Dates of Employment</p>
-                        <p class="job-description">Description of your responsibilities and achievements.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="placeholder" id="placeholder-education"></div>
-            <section class="education" data-section="education">
-                <div class="window-header">
-                    <h2>Education</h2>
-                    <span class="window-controls">
-                        <span class="button minimize"></span>
-                        <span class="button maximize"></span>
-                        <span class="button close"></span>
-                    </span>
-                </div>
-                <div class="cmd-prompt">C:/User/You> run education.exe</div>
-                <div class="content hidden-content">
-                    <div class="school">
-                        <h3>Degree</h3>
-                        <p class="institution">Institution Name | Graduation Year</p>
-                        <p class="description">Relevant coursework, honors, or awards.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="placeholder" id="placeholder-skills-projects"></div>
-            <div class="skills-projects" id="skills-projects">
-                <section class="skills" data-section="skills">
+    <div class="crt">
+        <div class="container">
+            <header>
+                <h1 id="name">Your Name</h1>
+                <p class="contact-info" id="contact-info">
+                    <span id="email"></span> | <span id="phone"></span> | 
+                    <a href="#" id="linkedin">LinkedIn</a> | 
+                    <a href="#" id="github">GitHub</a>
+                </p>
+            </header>
+            <main id="main-content">
+                <div class="placeholder" id="placeholder-summary"></div>
+                <section class="summary" data-section="summary">
                     <div class="window-header">
-                        <h2>Skills</h2>
+                        <h2>Summary</h2>
                         <span class="window-controls">
                             <span class="button minimize"></span>
                             <span class="button maximize"></span>
                             <span class="button close"></span>
                         </span>
                     </div>
-                    <div class="cmd-prompt">C:/User/You> run skills.exe</div>
+                    <div class="cmd-prompt">C:/User/You> run summary.exe</div>
                     <div class="content hidden-content">
-                        <ul>
-                            <li>Skill 1</li>
-                            <li>Skill 2</li>
-                            <li>Skill 3</li>
-                        </ul>
+                        Brief summary of your professional background and career goals.
                     </div>
                 </section>
-                <section class="projects" data-section="projects">
+                <div class="placeholder" id="placeholder-experience"></div>
+                <section class="experience" data-section="experience">
                     <div class="window-header">
-                        <h2>Projects</h2>
+                        <h2>Experience</h2>
                         <span class="window-controls">
                             <span class="button minimize"></span>
                             <span class="button maximize"></span>
                             <span class="button close"></span>
                         </span>
                     </div>
-                    <div class="cmd-prompt">C:/User/You> run projects.exe</div>
+                    <div class="cmd-prompt">C:/User/You> run experience.exe</div>
                     <div class="content hidden-content">
-                        <div class="project">
-                            <h3>Project Name</h3>
-                            <p class="description">Brief description of the project and your role.</p>
-                            <a href="#">Link to Project</a>
+                        <div class="job">
+                            <h3>Job Title</h3>
+                            <p class="company">Company Name | Dates of Employment</p>
+                            <p class="job-description">Description of your responsibilities and achievements.</p>
                         </div>
                     </div>
                 </section>
-            </div>
-        </main>
-    </div>
-    <div id="start-bar">
-        <button class="start-button" data-target="summary">Summary.exe</button>
-        <button class="start-button" data-target="experience">Experience.exe</button>
-        <button class="start-button" data-target="education">Education.exe</button>
-        <button class="start-button" data-target="skills">Skills.exe</button>
-        <button class="start-button" data-target="projects">Projects.exe</button>
-    </div>
-    <div id="overlay"></div>
-    <div id="popup" class="hidden">
-        This program is already running
-        <button id="popup-ok">OK</button>
+                <div class="placeholder" id="placeholder-education"></div>
+                <section class="education" data-section="education">
+                    <div class="window-header">
+                        <h2>Education</h2>
+                        <span class="window-controls">
+                            <span class="button minimize"></span>
+                            <span class="button maximize"></span>
+                            <span class="button close"></span>
+                        </span>
+                    </div>
+                    <div class="cmd-prompt">C:/User/You> run education.exe</div>
+                    <div class="content hidden-content">
+                        <div class="school">
+                            <h3>Degree</h3>
+                            <p class="institution">Institution Name | Graduation Year</p>
+                            <p class="description">Relevant coursework, honors, or awards.</p>
+                        </div>
+                    </div>
+                </section>
+                <div class="placeholder" id="placeholder-skills-projects"></div>
+                <div class="skills-projects" id="skills-projects">
+                    <section class="skills" data-section="skills">
+                        <div class="window-header">
+                            <h2>Skills</h2>
+                            <span class="window-controls">
+                                <span class="button minimize"></span>
+                                <span class="button maximize"></span>
+                                <span class="button close"></span>
+                            </span>
+                        </div>
+                        <div class="cmd-prompt">C:/User/You> run skills.exe</div>
+                        <div class="content hidden-content">
+                            <ul>
+                                <li>Skill 1</li>
+                                <li>Skill 2</li>
+                                <li>Skill 3</li>
+                            </ul>
+                        </div>
+                    </section>
+                    <section class="projects" data-section="projects">
+                        <div class="window-header">
+                            <h2>Projects</h2>
+                            <span class="window-controls">
+                                <span class="button minimize"></span>
+                                <span class="button maximize"></span>
+                                <span class="button close"></span>
+                            </span>
+                        </div>
+                        <div class="cmd-prompt">C:/User/You> run projects.exe</div>
+                        <div class="content hidden-content">
+                            <div class="project">
+                                <h3>Project Name</h3>
+                                <p class="description">Brief description of the project and your role.</p>
+                                <a href="#">Link to Project</a>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+        <div id="start-bar">
+            <button class="start-button" data-target="summary">Summary.exe</button>
+            <button class="start-button" data-target="experience">Experience.exe</button>
+            <button class="start-button" data-target="education">Education.exe</button>
+            <button class="start-button" data-target="skills">Skills.exe</button>
+            <button class="start-button" data-target="projects">Projects.exe</button>
+        </div>
+        <div id="overlay"></div>
+        <div id="popup" class="hidden">
+            This program is already running
+            <button id="popup-ok">OK</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

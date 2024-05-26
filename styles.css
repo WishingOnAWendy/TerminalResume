@@ -1,16 +1,97 @@
+/* Apply a dark background with green monochrome text */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide the overflow to avoid double scrollbars */
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     font-family: 'Share Tech Mono', monospace;
     background: #000;
     color: #00ff00;
-    margin: 0;
-    padding: 0;
+}
+
+.crt {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow: hidden;
+    perspective: 1000px;
+    background: #000;
+    border-radius: 15px;
+    position: relative; /* Ensure pseudo-elements are relative to this */
+
+}
+
+/* Simulate scan lines */
+.crt:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0) 1px,
+        rgba(0, 0, 0, 0.6) 3px
+    );
+    pointer-events: none;
+    z-index: 3; /* Ensure scan lines are on top */
+}
+
+/* Add a gradient effect to create see-through edges */
+.crt:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 255, 0, 0.06) 0%,
+        rgba(0, 255, 0, 0.02) 60%,
+        rgba(0, 255, 0, 0) 100%
+    );
+    pointer-events: none;
+    z-index: 4; /* Ensure gradient is on top */
+}
+
+header, main, .start-button, a {
+    background: transparent;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    font-family: inherit; /* Ensure the same font is used */
+}
+
+/* Adjust flicker effect */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 55%, 57%, 100% {
+        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+    20%, 22%, 56% {
+        text-shadow: none;
+    }
+}
+
+header h1, section h2, a {
+    animation: flicker 1.5s infinite alternate;
 }
 
 .container {
+    flex: 1;
     width: 90%;
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
+    position: relative;
+    z-index: 1; /* Ensure content is below scan lines and curvature */
+    overflow-y: auto; /* Allow scrolling within the container */
 }
 
 header {
@@ -62,10 +143,6 @@ section {
     height: 12px;
     border-radius: 50%;
     cursor: pointer;
-    position: relative; /* Ensure they all use the same positioning */
-    top: 0; /* Reset any vertical offset */
-    margin: 0; /* Reset any margins */
-    padding: 0; /* Reset any padding */
 }
 
 .window-controls .minimize {
@@ -88,7 +165,6 @@ section h2 {
 
 section .content {
     padding: 20px;
-    max-width: 100%; /* Allow content to expand fully */
 }
 
 .hidden-content {
@@ -103,7 +179,6 @@ section .content {
     grid-column: 1 / -1;
     height: auto;
     width: 100%;
-    padding-bottom: 100px; /* Add padding to visually indicate the section is maximized */
 }
 
 .skills-projects {
@@ -136,6 +211,7 @@ a:hover {
 #start-bar {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     background: #222;
     border-top: 1px solid #00ff00;
@@ -143,6 +219,8 @@ a:hover {
     justify-content: space-around;
     padding: 0;
     gap: 5px;
+    z-index: 1; /* Ensure it is below the crt elements */
+    font-family: inherit; /* Ensure the same font is used */
 }
 
 .start-button {
@@ -157,6 +235,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: inherit; /* Ensure buttons use the same font */
 }
 
 .start-button:hover {
@@ -196,7 +275,26 @@ a:hover {
     color: #ff0000;
     display: none;
     z-index: 1000; /* Ensure it is above the overlay */
-    text-align: center; /* Center text */
+    text-align: center;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow */
+}
+
+/* Add scan lines to popup */
+#popup:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0) 1px,
+        rgba(0, 0, 0, 0.3) 3px
+    );
+    pointer-events: none;
+    z-index: -1; /* Ensure scan lines are within the popup but behind the content */
 }
 
 #popup.visible {
@@ -204,13 +302,14 @@ a:hover {
 }
 
 #popup-ok {
-    background: #ff0000;
+    background: #292929;
     border: none;
     padding: 5px 10px;
-    color: #111;
+    color: #ff0000; /* Match the text color */
     cursor: pointer;
-    display: block; /* Ensure the button is block level */
-    margin: 10px auto 0; /* Center the button and add top margin */
+    display: block;
+    margin: 10px auto 0;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow */
 }
 
 .typing {
@@ -238,4 +337,42 @@ a:hover {
 .dividing-line {
     border-bottom: 1px solid #00ff00;
     margin: 10px 0; /* Add margin to space out the entries */
+}
+
+/* Custom scrollbar styles for WebKit-based browsers */
+::-webkit-scrollbar {
+    width: 12px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    background: #111; /* Background of the scrollbar track */
+    border: 1px solid #00ff00; /* Border of the scrollbar track */
+    border-radius: 10px; /* Rounding the edges of the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #111; /* Background for the thumb */
+    border: 2px solid #00ff00; /* Border color for the thumb */
+    border-radius: 10px; /* Rounding the edges of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #111; /* Keep the thumb background consistent on hover */
+    border-color: #00cc00; /* Change border color of the thumb when hovered */
+}
+
+::-webkit-scrollbar-corner {
+    background: #111; /* Background of the corner between vertical and horizontal scrollbars */
+}
+
+/* Firefox scrollbar styles */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #00ff00 #111; /* Green thumb, dark track */
+}
+
+/* For Internet Explorer and Edge */
+body {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
