@@ -65,20 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // Section is not open, recreate it from the stored state at the correct position
                 if (sectionStates[sectionClass]) {
-                    if (sectionClass === 'skills' || sectionClass === 'projects') {
-                        // Insert skills or projects into skills-projects container
-                        const skillsProjectsContainer = document.getElementById('skills-projects');
-                        skillsProjectsContainer.insertAdjacentHTML('beforeend', sectionStates[sectionClass]);
+                    const placeholder = document.getElementById(`placeholder-${sectionClass}`);
+                    if (placeholder) {
+                        placeholder.insertAdjacentHTML('afterend', sectionStates[sectionClass]);
                         reinitializeSection(sectionClass);
-                    } else {
-                        // Insert other sections at their placeholders
-                        const placeholder = document.getElementById(`placeholder-${sectionClass}`);
-                        if (placeholder) {
-                            placeholder.insertAdjacentHTML('afterend', sectionStates[sectionClass]);
-                            reinitializeSection(sectionClass);
-                        }
                     }
-                    maintainSkillsProjectsLayout(); // Ensure initial layout is correct
+                    if (sectionClass === 'skills' || sectionClass === 'projects') {
+                        maintainSkillsProjectsLayout(); // Ensure initial layout is correct
+                    }
                 }
             }
             setActiveButton(sectionClass, true); // Set the active button
@@ -191,12 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to reinitialize a section when reopened
     function reinitializeSection(sectionClass) {
         const section = mainContent.querySelector(`section[data-section="${sectionClass}"]`);
-        fetch('content.json')
-            .then(response => response.json())
-            .then(data => {
-                runCmdAnimation(sectionClass, data);
-            })
-            .catch(error => console.error('Error fetching content.json:', error));
+        if (section) {
+            fetch('content.json')
+                .then(response => response.json())
+                .then(data => {
+                    runCmdAnimation(sectionClass, data); // This should trigger the typing and content injection
+                })
+                .catch(error => console.error('Error fetching content.json:', error));
+        }
     }
 
     // Function to simulate typing text for command line and resume content
@@ -287,29 +283,25 @@ document.addEventListener('DOMContentLoaded', () => {
         overlay.style.display = 'block';
     }
 
-    // Function to maintain the layout of skills and projects sections
-    function maintainSkillsProjectsLayout() {
-        const skillsProjectsContainer = document.getElementById('skills-projects');
-        const skillsSection = skillsProjectsContainer.querySelector('section[data-section="skills"]');
-        const projectsSection = skillsProjectsContainer.querySelector('section[data-section="projects"]');
-
-        if (skillsSection && projectsSection) {
-            // Ensure they are side by side
-            skillsProjectsContainer.style.display = 'grid';
-            skillsProjectsContainer.style.gridTemplateColumns = '1fr 1fr';
+    // Function to set active button state
+    function setActiveButton(sectionClass, isActive) {
+        const button = startBar.querySelector(`button[data-target="${sectionClass}"]`);
+        if (button) {
+            button.classList.toggle('active', isActive);
         }
     }
 
-    // Function to set the active button in the start bar
-    function setActiveButton(sectionClass, isActive) {
-        document.querySelectorAll('.start-button').forEach(button => {
-            if (button.getAttribute('data-target') === sectionClass) {
-                if (isActive) {
-                    button.classList.add('active');
-                } else {
-                    button.classList.remove('active');
-                }
+    // Function to maintain the layout of skills and projects sections
+    function maintainSkillsProjectsLayout() {
+        const skillsProjectsContainer = document.getElementById('skills-projects');
+        if (skillsProjectsContainer) {
+            const skillsSection = skillsProjectsContainer.querySelector('section[data-section="skills"]');
+            const projectsSection = skillsProjectsContainer.querySelector('section[data-section="projects"]');
+            if (skillsSection && projectsSection) {
+                skillsProjectsContainer.innerHTML = '';
+                skillsProjectsContainer.appendChild(skillsSection);
+                skillsProjectsContainer.appendChild(projectsSection);
             }
-        });
+        }
     }
 });
