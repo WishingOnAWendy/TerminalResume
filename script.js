@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('linkedin').href = data.linkedin;
             document.getElementById('github').textContent = 'GitHub';
             document.getElementById('github').href = data.github;
-            
+
             cmdPromptName = `${data.firstName.toLowerCase()}${data.lastName.charAt(0).toUpperCase()}`;
 
             // Populate the sections with their respective content
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('section').forEach(section => {
         const sectionClass = section.getAttribute('data-section');
         sectionStates[sectionClass] = section.outerHTML;
+        console.log(`Stored initial state for section: ${sectionClass}`);
     });
 
     // Event listener for main content to handle minimize, maximize, and close buttons
@@ -57,22 +58,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = event.target;
         if (target.classList.contains('start-button')) {
             const sectionClass = target.getAttribute('data-target');
+            console.log(`Start button clicked for section: ${sectionClass}`);
             const section = mainContent.querySelector(`section[data-section="${sectionClass}"]`);
-
+    
             if (section) {
-                // Section is already open, show popup message
+                console.log(`Section ${sectionClass} is already open.`);
                 showPopup("This program is already running");
             } else {
-                // Section is not open, recreate it from the stored state at the correct position
+                console.log(`Section ${sectionClass} is not open, recreating...`);
+                // Recreate the placeholder if it does not exist
+                let placeholder = document.getElementById(`placeholder-${sectionClass}`);
+                if (!placeholder) {
+                    placeholder = document.createElement('div');
+                    placeholder.id = `placeholder-${sectionClass}`;
+                    mainContent.appendChild(placeholder);
+                }
+                // Recreate section
                 if (sectionStates[sectionClass]) {
-                    const placeholder = document.getElementById(`placeholder-${sectionClass}`);
-                    if (placeholder) {
-                        placeholder.insertAdjacentHTML('afterend', sectionStates[sectionClass]);
-                        reinitializeSection(sectionClass);
-                    }
+                    placeholder.insertAdjacentHTML('afterend', sectionStates[sectionClass]);
+                    reinitializeSection(sectionClass);
                     if (sectionClass === 'skills' || sectionClass === 'projects') {
+                        console.log(`Reinitializing layout for section: ${sectionClass}`);
                         maintainSkillsProjectsLayout(); // Ensure initial layout is correct
                     }
+                } else {
+                    console.log(`No stored state found for section: ${sectionClass}`);
                 }
             }
             setActiveButton(sectionClass, true); // Set the active button
@@ -186,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function reinitializeSection(sectionClass) {
         const section = mainContent.querySelector(`section[data-section="${sectionClass}"]`);
         if (section) {
+            console.log(`Reinitializing section: ${sectionClass}`);
             fetch('content.json')
                 .then(response => response.json())
                 .then(data => {
@@ -267,6 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to close a section
     function closeSection(section) {
         const sectionClass = section.getAttribute('data-section');
+        console.log(`Closing section: ${sectionClass}`);
         section.remove();
         setActiveButton(sectionClass, false); // Remove the active state
     }
@@ -288,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const button = startBar.querySelector(`button[data-target="${sectionClass}"]`);
         if (button) {
             button.classList.toggle('active', isActive);
+            console.log(`Set active button state for section: ${sectionClass} to ${isActive}`);
         }
     }
 
@@ -295,13 +308,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function maintainSkillsProjectsLayout() {
         const skillsProjectsContainer = document.getElementById('skills-projects');
         if (skillsProjectsContainer) {
-            const skillsSection = skillsProjectsContainer.querySelector('section[data-section="skills"]');
-            const projectsSection = skillsProjectsContainer.querySelector('section[data-section="projects"]');
+            const skillsSection = mainContent.querySelector('section[data-section="skills"]');
+            const projectsSection = mainContent.querySelector('section[data-section="projects"]');
             if (skillsSection && projectsSection) {
+                console.log('Maintaining layout for skills and projects');
                 skillsProjectsContainer.innerHTML = '';
                 skillsProjectsContainer.appendChild(skillsSection);
                 skillsProjectsContainer.appendChild(projectsSection);
+            } else {
+                console.log('Skills or Projects section not found for layout maintenance');
             }
+        } else {
+            console.log('Skills-Projects container not found');
         }
     }
 });
