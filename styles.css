@@ -83,7 +83,7 @@ header, main, .start-button, a {
     }
 }
 
-header h1, section h2, a {
+h1, h2, a, h3, p, .content, .cmd-prompt, .project .description, .job .company, .job .job-description, .school .institution, .school .description, .skills ul li, .contact-info, .scroll-wrapper, .start-bar, .start-button{
     animation: flicker 1.5s infinite alternate;
 }
 
