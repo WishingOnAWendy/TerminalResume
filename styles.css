@@ -22,6 +22,7 @@ body {
     perspective: 1000px;
     border-radius: 15px;
     position: relative; /* Ensure pseudo-elements are relative to this */
+    background: #000; /* Add background to CRT to avoid transparency issues */
 }
 
 /* Simulate scan lines */
@@ -84,11 +85,19 @@ header h1, section h2, a {
     flex: 1;
     width: 90%;
     max-width: 900px;
-    margin: 0px auto;
-    padding: 20px;
+    margin: 0 auto; /* Center horizontally */
     position: relative;
     z-index: 1; /* Ensure content is below scan lines and curvature */
+    background: transparent; /* Change to transparent */
+}
+
+.scroll-wrapper {
+    height: calc(100vh - 60px); /* Adjust height to account for start bar */
     overflow-y: auto; /* Allow scrolling within the container */
+    position: relative;
+    padding-top: 20px; /* Add padding to create space at top */
+    padding-bottom: 40px; /* Add padding to create space at bottom */
+    box-sizing: border-box; /* Include padding in height calculations */
 }
 
 header {
@@ -210,7 +219,7 @@ a:hover {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #222;
+    background: transparent; /* Change to transparent */
     border-top: 1px solid #00ff00;
     display: flex;
     justify-content: space-around;
@@ -218,6 +227,7 @@ a:hover {
     gap: 5px;
     z-index: 1; /* Ensure it is below the crt elements */
     font-family: inherit; /* Ensure the same font is used */
+    height: 40px; /* Ensure correct height */
 }
 
 .start-button {
@@ -344,19 +354,16 @@ a:hover {
 
 ::-webkit-scrollbar-track {
     background: #111; /* Background of the scrollbar track */
-    border: 1px solid #00ff00; /* Border of the scrollbar track */
     border-radius: 10px; /* Rounding the edges of the track */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #111; /* Background for the thumb */
-    border: 2px solid #00ff00; /* Border color for the thumb */
+    background: #00ff00; /* Background for the thumb */
     border-radius: 10px; /* Rounding the edges of the thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #111; /* Keep the thumb background consistent on hover */
-    border-color: #00cc00; /* Change border color of the thumb when hovered */
+    background: #00cc00; /* Change border color of the thumb when hovered */
 }
 
 ::-webkit-scrollbar-corner {
